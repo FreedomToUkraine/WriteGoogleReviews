@@ -16,3 +16,6 @@ To automatically write reviews on google:
 Please remove a few cities form the data.json and try to start from another letter than 'A'. It will speed up reviews publishing.
 
 You can adjust the message in under 'write_review' function.
+
+
+You can copy folders with the scrpit, edit data.json to point it to another cities and then run multiple instances seperately
