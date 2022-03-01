@@ -11,6 +11,8 @@ import time
 import json
 from time import sleep
 
+LOGIN_COUNT=0
+
 def read_json(filename):
     with open(filename, encoding="utf8") as f:
         data = json.load(f)
@@ -22,6 +24,7 @@ def wait_to_click(driver, delay, xpath):
     button.click()
 
 def scroll_to_click(driver, delay, xpath,p):
+    sleep(2)
     count=0
     while(count<6):
         try:
@@ -49,6 +52,7 @@ def scroll_to_click(driver, delay, xpath,p):
 def write_review(driver, delay):
     try:
         try:
+            sleep(3)
             reviews_xpath="/html/body/div[3]/div[9]/div[8]/div/div[1]/div/div/div[2]/div[1]/div[1]/div[2]/div/div[1]/span[1]/span/span/span[2]/span[1]/button"
             WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.XPATH,reviews_xpath)))
             button = driver.find_element(By.XPATH,reviews_xpath)
@@ -61,18 +65,36 @@ def write_review(driver, delay):
         button = driver.find_element(By.XPATH,write_xpath)
         button.click()
 
-# here the stars do not want to be selected
-        WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.CSS_SELECTOR,"div.s2xyy:nth-child(5)")))
-        button=driver.find_element(By.CSS_SELECTOR,"div.s2xyy:nth-child(5)")
-        button.click()
-                    
+        global LOGIN_COUNT
+        while LOGIN_COUNT==0:
+            sleep(20)
+            LOGIN_COUNT=1
+
+        sleep(5)            
         actions = ActionChains(driver)
+        
+
+        actions.send_keys(Keys.TAB)
+        actions.send_keys(Keys.TAB)
+        actions.send_keys(Keys.TAB)
+        actions.send_keys(Keys.TAB)
+        actions.send_keys(Keys.TAB)
+        actions.send_keys(Keys.TAB)
+        actions.send_keys(Keys.ENTER)
         actions.send_keys(Keys.TAB)
         actions.send_keys('Было хорошо! Однако, Путин испортил нам настроение, вторгшись в Украину. Восстаньте  против своего диктатора, прекратите убивать невинных людей! Ваше правительство лжет вам. Восстаньте!')
+        actions.send_keys(Keys.ENTER)
+        actions.send_keys(Keys.ENTER)
+        actions.send_keys(Keys.TAB)
+        actions.send_keys(Keys.TAB)
+        actions.send_keys(Keys.TAB)
+        actions.send_keys(Keys.ENTER)
+        actions.perform()
+        sleep(5)
     except Exception as exception: 
         print(exception)
-        sleep(15) #time to log in
         return
+
 
 def main():
     options = Options()
