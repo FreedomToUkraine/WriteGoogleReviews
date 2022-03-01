@@ -3,7 +3,7 @@ This software has been created only to help Ukraine.
 To automatically write reviews on google:
 
 1. Clone the repository
-2. Make sure that under C:\Program Files\Mozilla Firefox\firefox.exe is Mozilla Firefox executable
+2. Make sure that under C:\Program Files\Mozilla Firefox\firefox.exe is Mozilla Firefox executable. You can adjust the location in under main() function.
 3. Run the script: python app.py
 4. If the Mozilla does not launch please check step 2 and make sure that the geckodriver is compatible to your Mozilla's Version.
    You can download the proper version here: https://github.com/mozilla/geckodriver/releases.
